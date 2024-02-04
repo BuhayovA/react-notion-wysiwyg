@@ -1,5 +1,5 @@
 {
-  "name": "react-notion-wysiwyg",
+  "name": "react-notion-wysiwyg-test",
   "version": "0.0.1",
   "description": "Notion-style WYSIWYG editor",
   "author": "Alexey Buhayov",
@@ -16,11 +16,14 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.2.52",
     "react": "^18.2.0",
     "rollup": "^4.9.6",
     "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3"
   },
@@ -30,5 +33,12 @@
     "markdown",
     "nextjs",
     "react"
-  ]
+  ],
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
+  }
 }
