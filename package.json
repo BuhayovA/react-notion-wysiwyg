@@ -13,7 +13,7 @@
   "scripts": {
     "rollup": "rollup --bundleConfigAsCjs -c",
     "test": "jest",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build"
   },
   "peerDependencies": {
