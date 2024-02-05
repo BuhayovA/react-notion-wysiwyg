@@ -1,0 +1,115 @@
+"use client";
+
+import React, { useRef, useEffect, useState, useCallback } from "react";
+
+// libs
+import { EditorContent, JSONContent } from "@tiptap/react";
+
+// hooks
+import { useBlockEditor } from "@/hooks/useBlockEditor";
+
+// types
+import { Editor as EditorType } from "@tiptap/core";
+
+// components
+import { TextMenu } from "../menus/TextMenu";
+import { LinkMenu } from "@/components/menus";
+import { ColumnsMenu } from "@/extensions/MultiColumn/menus";
+import { TableColumnMenu, TableRowMenu } from "@/extensions/Table/menus";
+import ImageBlockMenu from "@/extensions/ImageBlock/components/ImageBlockMenu";
+
+// views
+import "./editor.css";
+import "./globals.css";
+import "../../styles/index.css";
+import "../../styles/partials/code.css";
+import "../../styles/partials/lists.css";
+import "../../styles/partials/table.css";
+import "../../styles/partials/collab.css";
+import "../../styles/partials/blocks.css";
+import "../../styles/partials/animations.css";
+import "../../styles/partials/typography.css";
+import "../../styles/partials/placeholder.css";
+
+export interface EditorProps {
+  /**
+   * The mode use for the editor theme palette.
+   * Defaults to 'light'.
+   */
+  mode?: "dark" | "light";
+  /**
+   * The default value to use for the editor.
+   * Defaults to defaultEditorContent.
+   */
+  defaultValue?: JSONContent | string;
+  /**
+   * A callback function that is called whenever the editor is updated
+   * Defaults to () => {}.
+   */
+  onUpdate: (editor: EditorType) => void;
+}
+
+const useDarkmode = () => {
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => setIsDarkMode(mediaQuery.matches);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleDarkMode = useCallback(
+    () => setIsDarkMode((isDark) => !isDark),
+    []
+  );
+  const lightMode = useCallback(() => setIsDarkMode(false), []);
+  const darkMode = useCallback(() => setIsDarkMode(true), []);
+
+  return {
+    isDarkMode,
+    toggleDarkMode,
+    lightMode,
+    darkMode,
+  };
+};
+
+export const Editor: React.FC<EditorProps> = ({ onUpdate, mode = "light" }) => {
+  const { darkMode, lightMode } = useDarkmode();
+  const menuContainerRef = useRef(null);
+  const editorRef = useRef<HTMLDivElement | null>(null);
+
+  const { editor } = useBlockEditor({ handleUpdate: onUpdate });
+
+  React.useEffect(() => (mode === "light" ? lightMode() : darkMode()), [mode]);
+
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <div className="flex h-full" ref={menuContainerRef}>
+      <div className="relative flex flex-col flex-1 h-full">
+        <EditorContent
+          editor={editor}
+          ref={editorRef}
+          className="flex-1 overflow-y-auto"
+        />
+        <LinkMenu editor={editor} appendTo={menuContainerRef} />
+        <TextMenu editor={editor} />
+        <ColumnsMenu editor={editor} appendTo={menuContainerRef} />
+        <TableRowMenu editor={editor} appendTo={menuContainerRef} />
+        <TableColumnMenu editor={editor} appendTo={menuContainerRef} />
+        <ImageBlockMenu editor={editor} appendTo={menuContainerRef} />
+      </div>
+    </div>
+  );
+};
+
+export default Editor;

@@ -16,5 +16,9 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
-  }
+
+    "paths": {
+      "@/*": ["./src/components/Editor/*"]
+    }
+  },
 }

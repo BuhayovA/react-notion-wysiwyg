@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
+import path from "path";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -21,6 +22,16 @@ const config: StorybookConfig = {
         useSWC: true,
       },
     },
+  },
+  webpackFinal: async (config) => {
+    if (config.resolve?.alias) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "@": path.resolve(__dirname, "../src/components/Editor/"),
+      };
+    }
+
+    return config;
   },
   docs: {
     autodocs: "tag",
