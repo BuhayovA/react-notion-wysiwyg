@@ -7,6 +7,7 @@ import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import packageJson from "./package.json" assert { type: "json" };
 import banner2 from 'rollup-plugin-banner2'
+import del from "rollup-plugin-delete";
 // const preserveDirectives = require("rollup-plugin-preserve-directives").default
 
 export default [
@@ -16,12 +17,12 @@ export default [
       {
         file: packageJson.main,
         format: "cjs",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         file: packageJson.module,
         format: "esm",
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
     plugins: [
@@ -40,7 +41,10 @@ export default [
   {
     input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
-    plugins: [dts()],
+    plugins: [
+        dts(),
+        del({ hook: "buildEnd", targets: ["dist/esm/types", "dist/cjs/types"] })
+    ],
     external: [/\.css$/],
   },
 ];
