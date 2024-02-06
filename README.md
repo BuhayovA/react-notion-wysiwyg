@@ -1,5 +1,4 @@
 <a href="https://buhayova.github.io/react-notion-wysiwyg/">
-  <img alt="react-notion-wysiwyg is a Notion-style WYSIWYG editor" src="https://buhayova.github.io/react-notion-wysiwyg/">
   <h1>DEMO</h1>
 </a>
 
