@@ -21,13 +21,13 @@ jobs:
       # Manual Checkout
       - uses: actions/checkout@v3
 
+      - name: Enable Corepack before setting up Node
+        run: corepack enable
+
       # Set up Node
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-
-      - name: Enable Corepack before setting up Node
-        run: corepack enable
 
       - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.1
         with:
