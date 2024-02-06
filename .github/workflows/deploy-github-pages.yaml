@@ -1,18 +1,38 @@
-name: Build and Publish storybook to GitHub Pages
+# Workflow name
+name: Storybook
 
 on:
+  # Event for the workflow to run on
   push:
     branches:
-      - "main"
+      - 'main'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# List of jobs
 jobs:
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.build-publish.outputs.page_url }}
     runs-on: ubuntu-latest
+    # Job steps
     steps:
-      - id: build-publish
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.0
+      # Manual Checkout
+      - uses: actions/checkout@v4
+
+      - name: Enable Corepack before setting up Node
+        run: corepack enable
+
+      # Set up Node
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.2
         with:
           install_command: yarn install
           build_command: yarn build-storybook
