@@ -1,16 +1,18 @@
-import { Spinner } from '@/components/ui/Spinner';
-import { useDropZone, useFileUpload, useUploader } from './hooks';
-import { Button } from '@/components/ui/Button';
-import { Icon } from '@/components/ui/Icon';
-import { cn } from '@/lib/utils';
-import React, { ChangeEvent, useCallback } from 'react';
+import { Spinner } from "@/components/ui/Spinner";
+import { useDropZone, useFileUpload, useUploader } from "./hooks";
+import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
+import { cn } from "@/lib/utils";
+import React, { ChangeEvent, useCallback } from "react";
 
 export const ImageUploader = ({
+  onUploaded,
   onUpload,
 }: {
-  onUpload: (url: string) => void;
+  onUpload: (file: File) => string | Promise<string>;
+  onUploaded: (url: string) => void;
 }) => {
-  const { loading, uploadFile } = useUploader({ onUpload });
+  const { loading, uploadFile } = useUploader({ onUploaded, onUpload });
   const { handleUploadClick, ref } = useFileUpload();
   const { draggedInside, onDrop, onDragEnter, onDragLeave } = useDropZone({
     uploader: uploadFile,
@@ -31,8 +33,8 @@ export const ImageUploader = ({
   }
 
   const wrapperClass = cn(
-    'flex flex-col items-center justify-center px-8 py-10 rounded-lg bg-opacity-80',
-    draggedInside && 'bg-neutral-100'
+    "flex flex-col items-center justify-center px-8 py-10 rounded-lg bg-opacity-80",
+    draggedInside && "bg-neutral-100"
   );
 
   return (
@@ -49,7 +51,7 @@ export const ImageUploader = ({
       />
       <div className="flex flex-col items-center justify-center gap-2">
         <div className="text-sm font-medium text-center text-neutral-400 dark:text-neutral-500">
-          {draggedInside ? 'Drop image here' : 'Drag and drop or'}
+          {draggedInside ? "Drop image here" : "Drag and drop or"}
         </div>
         <div>
           <Button

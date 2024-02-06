@@ -33,7 +33,12 @@ import "../../styles/partials/placeholder.css";
 
 export interface EditorProps {
   /**
-   * The mode use for the editor theme palette.
+   * This prop use to change the editor mode from "preview" to "edit" mode.
+   * Defaults to 'light'.
+   */
+  editable?: boolean;
+  /**
+   * This prop use for the editor theme palette.
    * Defaults to 'light'.
    */
   mode?: "dark" | "light";
@@ -44,20 +49,26 @@ export interface EditorProps {
   defaultValue?: JSONContent | string;
   /**
    * A callback function that is called whenever the editor is updated
-   * Defaults to () => {}.
    */
-  onUpdate: (editor: EditorType) => void;
+  onUpdate: (editor: EditorType) => void | Promise<void>;
+  /**
+   * A callback function that is called whenever the image upload
+   */
+  onUploadImage: (file: File) => string | Promise<string>;
 }
 
 const useDarkmode = () => {
   const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+      : false
   );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = () => setIsDarkMode(mediaQuery.matches);
     mediaQuery.addEventListener("change", handleChange);
+
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
@@ -80,12 +91,23 @@ const useDarkmode = () => {
   };
 };
 
-export const Editor: React.FC<EditorProps> = ({ onUpdate, mode = "light" }) => {
+export const Editor: React.FC<EditorProps> = ({
+  onUpdate = (editor) => console.log(editor.getHTML()),
+  onUploadImage,
+  editable = true,
+  mode = "light",
+  defaultValue,
+}) => {
   const { darkMode, lightMode } = useDarkmode();
   const menuContainerRef = useRef(null);
   const editorRef = useRef<HTMLDivElement | null>(null);
 
-  const { editor } = useBlockEditor({ handleUpdate: onUpdate });
+  const { editor } = useBlockEditor({
+    handleUpdate: onUpdate,
+    defaultValue,
+    onUploadImage,
+    editable,
+  });
 
   React.useEffect(() => (mode === "light" ? lightMode() : darkMode()), [mode]);
 

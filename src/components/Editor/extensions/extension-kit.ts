@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   BlockquoteFigure,
@@ -34,14 +34,18 @@ import {
   Column,
   TaskItem,
   TaskList,
-} from '.'
-import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight'
-import { ImageUpload } from './ImageUpload'
-import { common, createLowlight } from 'lowlight'
+} from ".";
+import { CodeBlockLowlight } from "@tiptap/extension-code-block-lowlight";
+import { ImageUpload } from "./ImageUpload";
+import { common, createLowlight } from "lowlight";
 
-const lowlight = createLowlight(common)
+const lowlight = createLowlight(common);
 
-export const ExtensionKit = () => [
+export const ExtensionKit = ({
+  onUpload,
+}: {
+  onUpload: (file: File) => string | Promise<string>;
+}) => [
   Document,
   Columns,
   TaskList,
@@ -65,7 +69,7 @@ export const ExtensionKit = () => [
   }),
   CodeBlockLowlight.configure({
     lowlight,
-    defaultLanguage: 'javascript',
+    defaultLanguage: "javascript",
   }),
   TextStyle,
   FontSize,
@@ -78,15 +82,16 @@ export const ExtensionKit = () => [
   Highlight.configure({ multicolor: true }),
   Underline,
   CharacterCount.configure({ limit: 50000 }),
-
-  ImageUpload,
+  ImageUpload.configure({
+    onUpload,
+  }),
   ImageBlock,
   TextAlign.extend({
     addKeyboardShortcuts() {
-      return {}
+      return {};
     },
   }).configure({
-    types: ['heading', 'paragraph'],
+    types: ["heading", "paragraph"],
   }),
   Subscript,
   Superscript,
@@ -98,7 +103,7 @@ export const ExtensionKit = () => [
   Placeholder.configure({
     includeChildren: true,
     showOnlyCurrent: false,
-    placeholder: () => '',
+    placeholder: () => "",
   }),
   SlashCommand,
   Focus,
@@ -106,8 +111,8 @@ export const ExtensionKit = () => [
   BlockquoteFigure,
   Dropcursor.configure({
     width: 2,
-    class: 'ProseMirror-dropcursor border-black',
+    class: "ProseMirror-dropcursor border-black",
   }),
-]
+];
 
-export default ExtensionKit
+export default ExtensionKit;

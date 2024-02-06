@@ -6,9 +6,8 @@ import {dts} from "rollup-plugin-dts";
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import packageJson from "./package.json" assert { type: "json" };
-import banner2 from 'rollup-plugin-banner2'
 import del from "rollup-plugin-delete";
-// const preserveDirectives = require("rollup-plugin-preserve-directives").default
+import preserveDirectives from "rollup-plugin-preserve-directives"
 
 export default [
   {
@@ -34,12 +33,11 @@ export default [
       postcss(),
 
       terser(),
-      banner2(() => '"use client";')
-      // preserveDirectives()
+      preserveDirectives()
     ],
   },
   {
-    input: "dist/esm/types/index.d.ts",
+    input: "dist/esm/types/components/Editor/components/BlockEditor/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [
         dts(),

@@ -82,6 +82,10 @@
     @apply dark:text-white;
   }
 
+  [contenteditable="false"]:focus {
+    outline: none;
+  }
+
   [data-type='blockquoteFigure'] figcaption {
     @apply text-sm text-neutral-500 mt-4 transition-all overflow-hidden;
     @apply dark:text-neutral-400;

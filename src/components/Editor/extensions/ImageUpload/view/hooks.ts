@@ -1,31 +1,36 @@
-import { DragEvent, useCallback, useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
-import { API } from '@/lib/api';
+import toast from "react-hot-toast";
+import { DragEvent, useCallback, useEffect, useRef, useState } from "react";
 
 export const useUploader = ({
+  onUploaded,
   onUpload,
 }: {
-  onUpload: (url: string) => void;
+  onUpload: (file: File) => string | Promise<string>;
+  onUploaded: (url: string) => void;
 }) => {
   const [loading, setLoading] = useState(false);
 
   const uploadFile = useCallback(
     async (file: File) => {
-      console.log(file);
-
       setLoading(true);
-      try {
-        const url = await API.uploadImage();
 
-        onUpload(url);
+      try {
+        const url = await onUpload(file);
+
+        if (!/^(ftp|http|https):\/\/[^ "]+$/.test(url)) {
+          throw new Error("Incorrect link");
+        }
+
+        onUploaded(url);
       } catch (errPayload) {
         // const error =
         //   errPayload?.response?.data?.error || 'Something went wrong';
-        toast.error('Something went wrong');
+        toast.error("Something went wrong");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     },
-    [onUpload]
+    [onUploaded]
   );
 
   return { loading, uploadFile };
@@ -58,12 +63,12 @@ export const useDropZone = ({
       setIsDragging(false);
     };
 
-    document.body.addEventListener('dragstart', dragStartHandler);
-    document.body.addEventListener('dragend', dragEndHandler);
+    document.body.addEventListener("dragstart", dragStartHandler);
+    document.body.addEventListener("dragend", dragEndHandler);
 
     return () => {
-      document.body.removeEventListener('dragstart', dragStartHandler);
-      document.body.removeEventListener('dragend', dragEndHandler);
+      document.body.removeEventListener("dragstart", dragStartHandler);
+      document.body.removeEventListener("dragend", dragEndHandler);
     };
   }, []);
 
@@ -85,13 +90,13 @@ export const useDropZone = ({
         }
       }
 
-      if (files.some(file => file.type.indexOf('image') === -1)) {
+      if (files.some((file) => file.type.indexOf("image") === -1)) {
         return;
       }
 
       e.preventDefault();
 
-      const filteredFiles = files.filter(f => f.type.indexOf('image') !== -1);
+      const filteredFiles = files.filter((f) => f.type.indexOf("image") !== -1);
 
       const file = filteredFiles.length > 0 ? filteredFiles[0] : undefined;
 

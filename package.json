@@ -1,12 +1,13 @@
 {
   "name": "react-notion-wysiwyg",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Notion-style WYSIWYG editor",
   "author": "Alexey Buhayov",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
+  "browser": "dist/index.umd.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BuhayovA/react-notion-wysiwyg"
@@ -63,7 +64,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^4.9.6",
-    "rollup-plugin-banner2": "^1.2.2",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -79,7 +79,6 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
     "@svgr/webpack": "^8.1.0",
-    "@tailwindcss/typography": "^0.5.10",
     "@tippyjs/react": "^4.2.6",
     "@tiptap/core": "2.2.1",
     "@tiptap/extension-bullet-list": "2.2.1",

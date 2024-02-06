@@ -1,33 +1,42 @@
-import { useEditor } from '@tiptap/react'
-import { ExtensionKit } from '@/extensions/extension-kit'
+import { JSONContent, useEditor } from "@tiptap/react";
+import { ExtensionKit } from "@/extensions/extension-kit";
 
 // types
-import { Editor } from '@tiptap/core'
+import { Editor } from "@tiptap/core";
 
 interface IParams {
-  handleUpdate: (editor: Editor) => void
+  editable?: boolean;
+  defaultValue?: JSONContent | string;
+  handleUpdate: (editor: Editor) => void;
+  onUploadImage: (file: File) => string | Promise<string>;
 }
 
-export const useBlockEditor = ({ handleUpdate }: IParams) => {
+export const useBlockEditor = ({
+  handleUpdate,
+  defaultValue,
+  editable,
+  onUploadImage,
+}: IParams) => {
   const editor = useEditor(
     {
+      editable,
+      content: defaultValue,
       autofocus: true,
-
       onUpdate({ editor }) {
-        handleUpdate(editor)
+        handleUpdate(editor);
       },
-      extensions: [...ExtensionKit()],
+      extensions: [...ExtensionKit({ onUpload: onUploadImage })],
       editorProps: {
         attributes: {
-          autocomplete: 'off',
-          autocorrect: 'off',
-          autocapitalize: 'off',
-          class: 'min-h-full',
+          autocomplete: "off",
+          autocorrect: "off",
+          autocapitalize: "off",
+          class: "min-h-full",
         },
       },
     },
     []
-  )
+  );
 
-  return { editor }
-}
+  return { editor };
+};

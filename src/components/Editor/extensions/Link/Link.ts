@@ -1,6 +1,6 @@
-import { mergeAttributes } from '@tiptap/core';
-import TiptapLink from '@tiptap/extension-link';
-import { Plugin } from '@tiptap/pm/state';
+import { mergeAttributes } from "@tiptap/core";
+import TiptapLink from "@tiptap/extension-link";
+import { Plugin } from "@tiptap/pm/state";
 
 export const Link = TiptapLink.extend({
   inclusive: false,
@@ -15,9 +15,9 @@ export const Link = TiptapLink.extend({
 
   renderHTML({ HTMLAttributes }) {
     return [
-      'a',
+      "a",
       mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-        class: 'link',
+        class: "link",
       }),
       0,
     ];
@@ -33,7 +33,7 @@ export const Link = TiptapLink.extend({
           handleKeyDown: (_, event: KeyboardEvent) => {
             const { selection } = editor.state;
 
-            if (event.key === 'Escape' && selection.empty !== true) {
+            if (event.key === "Escape" && !selection.empty) {
               editor.commands.focus(selection.to, { scrollIntoView: false });
             }
 
