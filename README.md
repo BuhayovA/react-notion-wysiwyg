@@ -1,6 +1,4 @@
-<a href="https://buhayova.github.io/react-notion-wysiwyg/">
-  <h1>DEMO</h1>
-</a>
+# [DEMO](https://buhayova.github.io/react-notion-wysiwyg/)
 
 ## Tech Stack
 
