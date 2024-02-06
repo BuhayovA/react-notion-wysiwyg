@@ -6,6 +6,9 @@
 /.pnp
 .pnp.js
 
+# storybook
+storybook-static
+
 # production
 /dist
 
