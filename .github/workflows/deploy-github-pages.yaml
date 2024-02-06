@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Enable Corepack before setting up Node
+        run: corepack enable
+
       - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.1
         with:
           install_command: yarn install
