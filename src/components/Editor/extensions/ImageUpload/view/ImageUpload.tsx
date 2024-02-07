@@ -3,11 +3,7 @@ import React, { useCallback } from "react";
 
 import { ImageUploader } from "./ImageUploader";
 
-export const ImageUpload = ({
-  getPos,
-  editor,
-  extension,
-}: {
+interface Props {
   getPos: () => number;
   editor: Editor;
   extension: {
@@ -15,7 +11,9 @@ export const ImageUpload = ({
       onUpload: (file: File) => string | Promise<string>;
     };
   };
-}) => {
+}
+
+export const ImageUpload: React.FC<Props> = ({ getPos, editor, extension }) => {
   const onUploaded = useCallback(
     (url: string) => {
       if (url) {

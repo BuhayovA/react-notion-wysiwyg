@@ -24,6 +24,12 @@ export default [
         sourcemap: false,
       },
     ],
+    onwarn(warning) {
+      if (warning.code === 'MODULE_LEVEL_DIRECTIVE') return;
+
+      // Log the warning to the console
+      console.warn(`Rollup warning: ${warning.message}`);
+    },
     plugins: [
       peerDepsExternal(),
 

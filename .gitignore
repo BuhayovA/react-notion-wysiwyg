@@ -9,6 +9,9 @@
 # storybook
 storybook-static
 
+# yarn logs
+.yarn
+
 # production
 /dist
 
