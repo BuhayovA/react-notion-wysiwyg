@@ -1,5 +1,11 @@
 # react-notion-wysiwyg
 
+## 0.1.4
+
+### Patch Changes
+
+- updated README.md
+
 ## 0.1.3
 
 ### Patch Changes
