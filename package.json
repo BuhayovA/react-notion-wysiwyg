@@ -1,6 +1,6 @@
 {
   "name": "react-notion-wysiwyg",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Notion-style WYSIWYG editor",
   "author": "Alexey Buhayov",
   "license": "MIT",

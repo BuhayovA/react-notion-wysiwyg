@@ -1,5 +1,11 @@
 # react-notion-wysiwyg
 
+## 0.1.5
+
+### Patch Changes
+
+- fixed problem with inserting images
+
 ## 0.1.4
 
 ### Patch Changes
