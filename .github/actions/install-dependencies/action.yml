@@ -7,6 +7,11 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Enable Corepack before setting up Node
+      shell: bash
+      run: corepack enable
+
+
     - name: Set up Node.js 18
       uses: actions/setup-node@v3
       with:
