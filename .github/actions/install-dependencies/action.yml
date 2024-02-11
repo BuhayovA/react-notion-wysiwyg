@@ -9,6 +9,7 @@ runs:
 
     - name: Enable Corepack before setting up Node
       run: corepack enable
+      shell: bash
 
     - uses: actions/setup-node@v3
       with:
