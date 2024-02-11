@@ -68,7 +68,10 @@ export const Page: React.FC = () => {
           .
         </p>
         <div className="tip-wrapper">
-          <Editor onUpdate={() => {}} />
+          <Editor
+            onUploadImage={() => "https://picsum.photos/1024"}
+            onUpdate={() => {}}
+          />
         </div>
       </section>
     </article>

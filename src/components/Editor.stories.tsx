@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Editor, { EditorProps } from "./components/BlockEditor";
+import { Editor, EditorProps } from "./index";
 
 const meta: Meta<EditorProps> = {
   title: "WYSIWYG/Editor",

@@ -8,7 +8,13 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import packageJson from "./package.json" assert { type: "json" };
 import del from "rollup-plugin-delete";
 import preserveDirectives from "rollup-plugin-preserve-directives"
+import { visualizer } from "rollup-plugin-visualizer";
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
+/**
+ * Rollup configuration to build the main bundle.
+ * @type {import('rollup').RollupOptions}
+ */
 export default [
   {
     input: "src/index.ts",
@@ -16,14 +22,15 @@ export default [
       {
         file: packageJson.main,
         format: "cjs",
-        sourcemap: false,
+        compact: true,
       },
       {
         file: packageJson.module,
         format: "esm",
-        sourcemap: false,
+        compact: true,
       },
     ],
+    external: ['react', 'react-dom'],
     onwarn(warning) {
       if (warning.code === 'MODULE_LEVEL_DIRECTIVE') return;
 
@@ -37,13 +44,14 @@ export default [
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss(),
-
       terser(),
-      preserveDirectives()
+
+      preserveDirectives(),
+      visualizer({sourcemap: true, template: 'sunburst'}),
     ],
   },
   {
-    input: "dist/esm/types/components/Editor/components/BlockEditor/index.d.ts",
+    input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [
         dts(),

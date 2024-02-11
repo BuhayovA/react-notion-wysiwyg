@@ -1,6 +1,9 @@
 .env
 .idea
 
+# debug
+stats.html
+
 # dependencies
 /node_modules
 /.pnp
