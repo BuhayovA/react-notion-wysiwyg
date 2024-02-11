@@ -1,27 +1,25 @@
 name: Install Dependencies
+
 description: Composite action to install project dependencies using Yarn 4 and Node.js 18
 
 runs:
-  using: 'composite'
+  using: composite
   steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Enable Corepack before setting up Node
-      shell: bash
-      run: corepack enable
-
 
     - name: Set up Node.js 18
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
 
-    - name: Install Yarn
-      run: npm install -g yarn@4
+    - name: Install Yarn 4
+      run: |
+        sudo apt update
+        sudo apt install yarn=4.*
       shell: bash
 
     - name: Install dependencies
       run: yarn install
-      shell: bash
       working-directory: ${{ inputs.working-directory }}
+      shell: bash
