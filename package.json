@@ -27,7 +27,7 @@
     "prepublish": "yarn && yarn clean && yarn build"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
