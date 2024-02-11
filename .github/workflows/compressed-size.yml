@@ -10,9 +10,6 @@ jobs:
       # Manual Checkout
       - uses: actions/checkout@v4
 
-      - name: Enable Corepack before setting up Node
-        run: corepack enable
-
       - name: Install Dependencies
         uses: ./.github/actions/install-dependencies
 

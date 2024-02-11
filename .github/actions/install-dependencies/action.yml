@@ -4,6 +4,9 @@ description: This is a composite GitHub Action that sets up Yarn, Node.js, and i
 runs:
   using: composite
   steps:
+    # Manual Checkout
+    - uses: actions/checkout@v4
+
     - uses: actions/setup-node@v3
       with:
         node-version: 18
