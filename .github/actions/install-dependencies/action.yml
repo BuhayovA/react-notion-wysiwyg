@@ -4,12 +4,18 @@ description: This is a composite GitHub Action that sets up Yarn, Node.js, and i
 runs:
   using: composite
   steps:
-    - uses: yarnpkg/setup-yarn@v2
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
       with:
-        version: 4.1.0
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+        node-version: 20
         cache: yarn
-    - run: yarn install --frozen-lockfile
+
+    - name: Install Yarn
+      run: |
+        npm install -g yarn@4.1.0
+      shell: bash
+
+    - name: Install Dependencies with Yarn
+      run: |
+        yarn install --frozen-lockfile
       shell: bash
