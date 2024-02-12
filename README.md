@@ -9,6 +9,14 @@
   <img src="./assets/demo.gif" alt="Wysiwyg demo" />
 </p>
 
+<div align="center">
+
+[![npm downloads](https://img.shields.io/npm/dm/react-notion-wysiwyg.svg?style=for-the-badge)](https://www.npmjs.com/package/react-notion-wysiwyg)
+[![npm](https://img.shields.io/npm/dt/react-notion-wysiwyg.svg?style=for-the-badge)](https://www.npmjs.com/package/react-notion-wysiwyg)
+[![npm](https://img.shields.io/npm/l/react-notion-wysiwyg?style=for-the-badge)](https://github.com/splitbee/react-notion/blob/main/LICENSE)
+
+</div>
+
 [**DEMO**](https://buhayova.github.io/react-notion-wysiwyg/)
 
 ### Install
