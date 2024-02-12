@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useRef } from "react";
 
 // libs
 import { EditorContent, JSONContent } from "@tiptap/react";
 
 // hooks
+import { useDarkmode } from "@/hooks/useDarkmode";
 import { useBlockEditor } from "@/hooks/useBlockEditor";
 
 // types
 import { Editor as EditorType } from "@tiptap/core";
 
 // components
-import { TextMenu } from "../menus/TextMenu";
-import { LinkMenu } from "@/components/menus";
+import { LinkMenu, TextMenu } from "@/components/menus";
 import { ColumnsMenu } from "@/extensions/MultiColumn/menus";
 import { TableColumnMenu, TableRowMenu } from "@/extensions/Table/menus";
 import ImageBlockMenu from "@/extensions/ImageBlock/components/ImageBlockMenu";
@@ -21,17 +21,17 @@ import ImageBlockMenu from "@/extensions/ImageBlock/components/ImageBlockMenu";
 // views
 import "./editor.css";
 import "./globals.css";
-import "../../styles/index.css";
-import "../../styles/partials/code.css";
-import "../../styles/partials/lists.css";
-import "../../styles/partials/table.css";
-import "../../styles/partials/collab.css";
-import "../../styles/partials/blocks.css";
-import "../../styles/partials/animations.css";
-import "../../styles/partials/typography.css";
-import "../../styles/partials/placeholder.css";
+import "./styles/index.css";
+import "./styles/partials/code.css";
+import "./styles/partials/lists.css";
+import "./styles/partials/table.css";
+import "./styles/partials/collab.css";
+import "./styles/partials/blocks.css";
+import "./styles/partials/animations.css";
+import "./styles/partials/typography.css";
+import "./styles/partials/placeholder.css";
 
-export interface EditorProps {
+interface EditorProps {
   /**
    * This prop use to change the editor mode from "preview" to "edit" mode.
    * Defaults to 'light'.
@@ -50,53 +50,19 @@ export interface EditorProps {
   /**
    * A callback function that is called whenever the editor is updated
    */
-  onUpdate: (editor: EditorType) => void | Promise<void>;
+  onUpdate: (editor: EditorType) => void;
   /**
    * A callback function that is called whenever the image upload
    */
   onUploadImage: (file: File) => string | Promise<string>;
 }
 
-const useDarkmode = () => {
-  const [isDarkMode, setIsDarkMode] = useState(
-    typeof window !== "undefined"
-      ? window.matchMedia("(prefers-color-scheme: dark)").matches
-      : false
-  );
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => setIsDarkMode(mediaQuery.matches);
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
-
-  const toggleDarkMode = useCallback(
-    () => setIsDarkMode((isDark) => !isDark),
-    []
-  );
-  const lightMode = useCallback(() => setIsDarkMode(false), []);
-  const darkMode = useCallback(() => setIsDarkMode(true), []);
-
-  return {
-    isDarkMode,
-    toggleDarkMode,
-    lightMode,
-    darkMode,
-  };
-};
-
-export const Editor: React.FC<EditorProps> = ({
-  onUpdate = (editor) => console.log(editor.getHTML()),
-  onUploadImage,
+const Editor: React.FC<EditorProps> = ({
+  onUpdate = () => {},
   editable = true,
   mode = "light",
   defaultValue,
+  onUploadImage,
 }) => {
   const { darkMode, lightMode } = useDarkmode();
   const menuContainerRef = useRef(null);
@@ -134,4 +100,4 @@ export const Editor: React.FC<EditorProps> = ({
   );
 };
 
-export default Editor;
+export { Editor, EditorProps };

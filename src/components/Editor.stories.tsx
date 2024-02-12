@@ -1,14 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Editor, { EditorProps } from "./components/BlockEditor";
+import { Editor, EditorProps } from "./index";
 
 const meta: Meta<EditorProps> = {
   title: "WYSIWYG/Editor",
   component: Editor,
   tags: ["autodocs"],
-  argTypes: {
-    onUploadImage: () => "https://pixy.org/src/477/4774988.jpg",
-  },
 } satisfies Meta<EditorProps>;
 
 export default meta;
@@ -17,12 +14,14 @@ type Story = StoryObj<typeof meta>;
 export const Light: Story = {
   args: {
     mode: "light",
+    onUploadImage: () => "https://picsum.photos/1024",
   },
 };
 
 export const Dark: Story = {
   args: {
     mode: "dark",
+    onUploadImage: () => "https://picsum.photos/1024",
   },
 };
 

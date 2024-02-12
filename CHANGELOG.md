@@ -1,5 +1,29 @@
 # react-notion-wysiwyg
 
+## 0.1.9
+
+### Patch Changes
+
+- removed unnessesary deps
+
+## 0.1.8
+
+### Patch Changes
+
+- downgrade
+
+## 0.1.7
+
+### Patch Changes
+
+- builder configuration has been rewritten & the bundle size has been reduced
+
+## 0.1.6
+
+### Patch Changes
+
+- updated build
+
 ## 0.1.5
 
 ### Patch Changes

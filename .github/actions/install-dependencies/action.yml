@@ -1,0 +1,20 @@
+name: Install Dependencies
+description: This is a composite GitHub Action that sets up Yarn, Node.js, and installs the project's dependencies.
+
+runs:
+  using: composite
+  steps:
+    # Manual Checkout
+    - uses: actions/checkout@v4
+
+    - name: Enable Corepack before setting up Node
+      run: corepack enable
+      shell: bash
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: yarn
+
+    - run: yarn install --frozen-lockfile
+      shell: bash
