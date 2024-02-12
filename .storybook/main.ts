@@ -27,7 +27,7 @@ const config: StorybookConfig = {
     if (config.resolve?.alias) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        "@": path.resolve(__dirname, "../src/components/Editor/"),
+        "@": path.resolve(__dirname, "../src/components/"),
       };
     }
 
