@@ -70,11 +70,17 @@ const Editor: React.FC<EditorProps> = ({
 
   const { editor } = useBlockEditor({
     handleUpdate: onUpdate,
-    defaultValue,
     onUploadImage,
-    editable,
+    defaultValue,
   });
 
+  React.useEffect(() => {
+    if (!editor) {
+      return undefined;
+    }
+
+    editor.setEditable(editable);
+  }, [editor, editable]);
   React.useEffect(() => (mode === "light" ? lightMode() : darkMode()), [mode]);
 
   if (!editor) {
