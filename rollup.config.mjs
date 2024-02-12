@@ -9,7 +9,6 @@ import packageJson from "./package.json" assert { type: "json" };
 import del from "rollup-plugin-delete";
 import preserveDirectives from "rollup-plugin-preserve-directives"
 import { visualizer } from "rollup-plugin-visualizer";
-import sourcemaps from 'rollup-plugin-sourcemaps';
 
 /**
  * Rollup configuration to build the main bundle.
