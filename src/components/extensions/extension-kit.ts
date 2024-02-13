@@ -44,7 +44,7 @@ const lowlight = createLowlight(common);
 export const ExtensionKit = ({
   onUpload,
 }: {
-  onUpload: (file: File) => string | Promise<string>;
+  onUpload?: (file: File) => string | Promise<string>;
 }) => [
   Document,
   Columns,

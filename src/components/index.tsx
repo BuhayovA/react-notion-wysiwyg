@@ -50,11 +50,11 @@ interface EditorProps {
   /**
    * A callback function that is called whenever the editor is updated
    */
-  onUpdate: (editor: EditorType) => void;
+  onUpdate?: (editor: EditorType) => void;
   /**
    * A callback function that is called whenever the image upload
    */
-  onUploadImage: (file: File) => string | Promise<string>;
+  onUploadImage?: (file: File) => string | Promise<string>;
 }
 
 const Editor: React.FC<EditorProps> = ({

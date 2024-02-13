@@ -1,5 +1,11 @@
 # react-notion-wysiwyg
 
+## 0.1.10
+
+### Patch Changes
+
+- fixed editable prop & fixed issue with freezing shortcut help tooltip
+
 ## 0.1.9
 
 ### Patch Changes

@@ -7,8 +7,8 @@ import { Editor } from "@tiptap/core";
 interface IParams {
   editable?: boolean;
   defaultValue?: JSONContent | string;
-  handleUpdate: (editor: Editor) => void;
-  onUploadImage: (file: File) => string | Promise<string>;
+  handleUpdate?: (editor: Editor) => void;
+  onUploadImage?: (file: File) => string | Promise<string>;
 }
 
 export const useBlockEditor = ({
@@ -23,7 +23,7 @@ export const useBlockEditor = ({
       content: defaultValue,
       autofocus: true,
       onUpdate({ editor }) {
-        handleUpdate(editor);
+        handleUpdate?.(editor);
       },
       extensions: [...ExtensionKit({ onUpload: onUploadImage })],
       editorProps: {
@@ -35,7 +35,7 @@ export const useBlockEditor = ({
         },
       },
     },
-    []
+    [],
   );
 
   return { editor };
