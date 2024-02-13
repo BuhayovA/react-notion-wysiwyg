@@ -6,8 +6,6 @@ const meta: Meta<EditorProps> = {
   title: "WYSIWYG/Editor",
   component: Editor,
   argTypes: {
-    editable: { control: false },
-    // defaultValue: { control: "text", description: "Write the HTML code" },
     onUpdate: { control: false },
     defaultValue: { control: false },
     onUploadImage: { control: false },

@@ -1,38 +1,38 @@
-import { Icon } from '@/components/ui/Icon'
-import { Toolbar } from '@/components/ui/Toolbar'
-import { useTextmenuCommands } from './hooks/useTextmenuCommands'
-import { useTextmenuStates } from './hooks/useTextmenuStates'
-import { BubbleMenu, Editor } from '@tiptap/react'
-import React, { memo } from 'react'
-import * as Popover from '@radix-ui/react-popover'
-import { Surface } from '@/components/ui/Surface'
-import { ColorPicker } from '@/components/panels'
-import { FontFamilyPicker } from './components/FontFamilyPicker'
-import { FontSizePicker } from './components/FontSizePicker'
-import { useTextmenuContentTypes } from './hooks/useTextmenuContentTypes'
-import { ContentTypePicker } from './components/ContentTypePicker'
-import { EditLinkPopover } from './components/EditLinkPopover'
+import { Icon } from "@/components/ui/Icon";
+import { Toolbar } from "@/components/ui/Toolbar";
+import { useTextmenuCommands } from "./hooks/useTextmenuCommands";
+import { useTextmenuStates } from "./hooks/useTextmenuStates";
+import { BubbleMenu, Editor } from "@tiptap/react";
+import React, { memo } from "react";
+import * as Popover from "@radix-ui/react-popover";
+import { Surface } from "@/components/ui/Surface";
+import { ColorPicker } from "@/components/panels";
+import { FontFamilyPicker } from "./components/FontFamilyPicker";
+import { FontSizePicker } from "./components/FontSizePicker";
+import { useTextmenuContentTypes } from "./hooks/useTextmenuContentTypes";
+import { ContentTypePicker } from "./components/ContentTypePicker";
+import { EditLinkPopover } from "./components/EditLinkPopover";
 
 // We memorize the button so each button is not rerendered
 // on every editor state change
-const MemoButton = memo(Toolbar.Button)
-const MemoColorPicker = memo(ColorPicker)
-const MemoFontFamilyPicker = memo(FontFamilyPicker)
-const MemoFontSizePicker = memo(FontSizePicker)
-const MemoContentTypePicker = memo(ContentTypePicker)
+const MemoButton = memo(Toolbar.Button);
+const MemoColorPicker = memo(ColorPicker);
+const MemoFontFamilyPicker = memo(FontFamilyPicker);
+const MemoFontSizePicker = memo(FontSizePicker);
+const MemoContentTypePicker = memo(ContentTypePicker);
 
 export type TextMenuProps = {
-  editor: Editor
-}
+  editor: Editor;
+};
 
 export const TextMenu = ({ editor }: TextMenuProps) => {
-  const commands = useTextmenuCommands(editor)
-  const states = useTextmenuStates(editor)
-  const blockOptions = useTextmenuContentTypes(editor)
+  const commands = useTextmenuCommands(editor);
+  const states = useTextmenuStates(editor);
+  const blockOptions = useTextmenuContentTypes(editor);
 
   return (
     <BubbleMenu
-      tippyOptions={{ popperOptions: { placement: 'top-start' } }}
+      tippyOptions={{ popperOptions: { placement: "top-start" } }}
       editor={editor}
       pluginKey="textMenu"
       shouldShow={states.shouldShow}
@@ -40,15 +40,26 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
     >
       <Toolbar.Wrapper>
         <MemoContentTypePicker options={blockOptions} />
-        <MemoFontFamilyPicker onChange={commands.onSetFont} value={states.currentFont || ''} />
-        <MemoFontSizePicker onChange={commands.onSetFontSize} value={states.currentSize || ''} />
+        <MemoFontFamilyPicker
+          onChange={commands.onSetFont}
+          value={states.currentFont || ""}
+        />
+        <MemoFontSizePicker
+          onChange={commands.onSetFontSize}
+          value={states.currentSize || ""}
+        />
         <Toolbar.Divider />
-        <MemoButton tooltip="Bold" tooltipShortcut={['Mod', 'B']} onClick={commands.onBold} active={states.isBold}>
+        <MemoButton
+          tooltip="Bold"
+          tooltipShortcut={["Mod", "B"]}
+          onClick={commands.onBold}
+          active={states.isBold}
+        >
           <Icon name="Bold" />
         </MemoButton>
         <MemoButton
           tooltip="Italic"
-          tooltipShortcut={['Mod', 'I']}
+          tooltipShortcut={["Mod", "I"]}
           onClick={commands.onItalic}
           active={states.isItalic}
         >
@@ -56,7 +67,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
         </MemoButton>
         <MemoButton
           tooltip="Underline"
-          tooltipShortcut={['Mod', 'U']}
+          tooltipShortcut={["Mod", "U"]}
           onClick={commands.onUnderline}
           active={states.isUnderline}
         >
@@ -64,13 +75,18 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
         </MemoButton>
         <MemoButton
           tooltip="Strikehrough"
-          tooltipShortcut={['Mod', 'X']}
+          tooltipShortcut={["Mod", "X"]}
           onClick={commands.onStrike}
           active={states.isStrike}
         >
           <Icon name="Strikethrough" />
         </MemoButton>
-        <MemoButton tooltip="Code" tooltipShortcut={['Mod', 'E']} onClick={commands.onCode} active={states.isCode}>
+        <MemoButton
+          tooltip="Code"
+          tooltipShortcut={["Mod", "E"]}
+          onClick={commands.onCode}
+          active={states.isCode}
+        >
           <Icon name="Code" />
         </MemoButton>
         <MemoButton tooltip="Code block" onClick={commands.onCodeBlock}>
@@ -79,7 +95,10 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
         <EditLinkPopover onSetLink={commands.onLink} />
         <Popover.Root>
           <Popover.Trigger asChild>
-            <MemoButton active={!!states.currentHighlight} tooltip="Highlight text">
+            <MemoButton
+              active={!!states.currentHighlight}
+              tooltip="Highlight text"
+            >
               <Icon name="Highlighter" />
             </MemoButton>
           </Popover.Trigger>
@@ -119,7 +138,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
             <Toolbar.Wrapper>
               <MemoButton
                 tooltip="Subscript"
-                tooltipShortcut={['Mod', '.']}
+                tooltipShortcut={["Mod", "."]}
                 onClick={commands.onSubscript}
                 active={states.isSubscript}
               >
@@ -127,7 +146,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
               </MemoButton>
               <MemoButton
                 tooltip="Superscript"
-                tooltipShortcut={['Mod', ',']}
+                tooltipShortcut={["Mod", ","]}
                 onClick={commands.onSuperscript}
                 active={states.isSuperscript}
               >
@@ -136,7 +155,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
               <Toolbar.Divider />
               <MemoButton
                 tooltip="Align left"
-                tooltipShortcut={['Shift', 'Mod', 'L']}
+                tooltipShortcut={["Shift", "Mod", "L"]}
                 onClick={commands.onAlignLeft}
                 active={states.isAlignLeft}
               >
@@ -144,7 +163,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
               </MemoButton>
               <MemoButton
                 tooltip="Align center"
-                tooltipShortcut={['Shift', 'Mod', 'E']}
+                tooltipShortcut={["Shift", "Mod", "E"]}
                 onClick={commands.onAlignCenter}
                 active={states.isAlignCenter}
               >
@@ -152,7 +171,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
               </MemoButton>
               <MemoButton
                 tooltip="Align right"
-                tooltipShortcut={['Shift', 'Mod', 'R']}
+                tooltipShortcut={["Shift", "Mod", "R"]}
                 onClick={commands.onAlignRight}
                 active={states.isAlignRight}
               >
@@ -160,7 +179,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
               </MemoButton>
               <MemoButton
                 tooltip="Justify"
-                tooltipShortcut={['Shift', 'Mod', 'J']}
+                tooltipShortcut={["Shift", "Mod", "J"]}
                 onClick={commands.onAlignJustify}
                 active={states.isAlignJustify}
               >
@@ -171,5 +190,5 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
         </Popover.Root>
       </Toolbar.Wrapper>
     </BubbleMenu>
-  )
-}
+  );
+};
