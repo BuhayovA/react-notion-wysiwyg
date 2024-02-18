@@ -22,15 +22,18 @@ export const useUploader = ({
         }
 
         onUploaded(url);
-      } catch (errPayload) {
-        // const error =
-        //   errPayload?.response?.data?.error || 'Something went wrong';
-        toast.error("Something went wrong");
+      } catch (errPayload: any) {
+        const error =
+          errPayload?.response?.data?.error ||
+          errPayload?.message ||
+          "Something went wrong";
+
+        toast.error(error);
       } finally {
         setLoading(false);
       }
     },
-    [onUploaded]
+    [onUploaded],
   );
 
   return { loading, uploadFile };
@@ -104,7 +107,7 @@ export const useDropZone = ({
         uploader(file);
       }
     },
-    [uploader]
+    [uploader],
   );
 
   const onDragEnter = () => {

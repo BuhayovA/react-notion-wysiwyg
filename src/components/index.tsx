@@ -30,6 +30,7 @@ import "./styles/partials/blocks.css";
 import "./styles/partials/animations.css";
 import "./styles/partials/typography.css";
 import "./styles/partials/placeholder.css";
+import { Toaster } from "react-hot-toast";
 
 interface EditorProps {
   /**
@@ -102,6 +103,8 @@ const Editor: React.FC<EditorProps> = ({
         <TableColumnMenu editor={editor} appendTo={menuContainerRef} />
         <ImageBlockMenu editor={editor} appendTo={menuContainerRef} />
       </div>
+
+      <Toaster />
     </div>
   );
 };
