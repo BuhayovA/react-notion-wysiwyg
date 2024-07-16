@@ -47,7 +47,7 @@ interface EditorProps {
    * The default value to use for the editor.
    * Defaults to defaultEditorContent.
    */
-  defaultValue?: JSONContent | string;
+  content?: JSONContent | string;
   /**
    * A callback function that is called whenever the editor is updated
    */
@@ -62,7 +62,7 @@ const Editor: React.FC<EditorProps> = ({
   onUpdate = () => {},
   editable = true,
   mode = "light",
-  defaultValue,
+  content,
   onUploadImage,
 }) => {
   const { darkMode, lightMode } = useDarkmode();
@@ -72,7 +72,7 @@ const Editor: React.FC<EditorProps> = ({
   const { editor } = useBlockEditor({
     handleUpdate: onUpdate,
     onUploadImage,
-    defaultValue,
+    content,
   });
 
   React.useEffect(() => {
@@ -83,6 +83,14 @@ const Editor: React.FC<EditorProps> = ({
     editor.setEditable(editable);
   }, [editor, editable]);
   React.useEffect(() => (mode === "light" ? lightMode() : darkMode()), [mode]);
+
+  React.useEffect(() => {
+    if (!editor) return;
+
+    if (content) {
+      editor.commands.setContent(content);
+    }
+  }, [editor, content]);
 
   if (!editor) {
     return null;

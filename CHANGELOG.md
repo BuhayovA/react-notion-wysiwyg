@@ -1,5 +1,23 @@
 # react-notion-wysiwyg
 
+## 0.1.13
+
+### Patch Changes
+
+- hot-fix
+
+## 0.1.12
+
+### Patch Changes
+
+- hot-fix
+
+## 0.1.11
+
+### Patch Changes
+
+- update default values setup
+
 ## 0.1.10
 
 ### Patch Changes
