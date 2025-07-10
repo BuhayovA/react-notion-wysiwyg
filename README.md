@@ -1,9 +1,9 @@
-> #####  **This library is in active development!**
-> Updates are released almost every day, and I hope it will soon work relatively stable and have a convenient API.
+> ##### 🚧 **This library is in active development again!**
+> I'm back to working on this project, and you can expect regular updates, bug fixes, and new features.
 >
-> Your [feedbacks](https://github.com/BuhayovA/react-notion-wysiwyg/issues) is highly important to us, help make this product better.
+> Your [feedback](https://github.com/BuhayovA/react-notion-wysiwyg/issues) is highly appreciated — it helps shape the roadmap and prioritize improvements.
 >
-> This is my first experience in library development, so some errors or improvements might take time, but ultimately they will be addressed, as we are constantly learning! I'll also be glad to welcome contributors!
+> This is my first open-source library, and while it may not be perfect yet, I'm constantly learning and improving. Contributions, suggestions, and bug reports are more than welcome!
 
 <p align="center">
   <img src="./assets/demo.gif" alt="Wysiwyg demo" />
