@@ -1,4 +1,4 @@
-> ##### 🚧 **This library is in active development again!**
+> ##### 🚧 **This library is not under active development at the moment.**
 > I'm back to working on this project, and you can expect regular updates, bug fixes, and new features.
 >
 > Your [feedback](https://github.com/BuhayovA/react-notion-wysiwyg/issues) is highly appreciated — it helps shape the roadmap and prioritize improvements.
